@@ -55,7 +55,3 @@ func (self *BytecodeReader) ReadInt32s(n int32) []int32 {
 func (self *BytecodeReader) PC() int {
 	return self.pc
 }
-
-func (self *BytecodeReader) Code() []byte {
-	return self.code
-}

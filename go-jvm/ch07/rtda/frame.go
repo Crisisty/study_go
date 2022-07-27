@@ -11,7 +11,7 @@ type Frame struct {
 	nextPC       int
 }
 
-func NewFrame(thread *Thread, method *heap.Method) *Frame {
+func newFrame(thread *Thread, method *heap.Method) *Frame {
 	return &Frame{
 		thread:       thread,
 		method:       method,
@@ -44,6 +44,6 @@ func (self *Frame) Method() *heap.Method {
 	return self.method
 }
 
-func (self *Frame) RevertNextPc() {
+func (self *Frame) RevertNextPC() {
 	self.nextPC = self.thread.pc
 }

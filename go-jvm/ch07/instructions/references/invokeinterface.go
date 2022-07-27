@@ -4,17 +4,18 @@ import (
 	"jvmgo/ch07/instructions/base"
 	"jvmgo/ch07/rtda"
 	"jvmgo/ch07/rtda/heap"
-	"log"
 )
 
 type INVOKE_INTERFACE struct {
 	index uint
+	// count uint8
+	// zero uint8
 }
 
 func (self *INVOKE_INTERFACE) FetchOperands(reader *base.BytecodeReader) {
 	self.index = uint(reader.ReadUint16())
-	reader.ReadUint8()
-	reader.ReadUint8()
+	reader.ReadUint8() // count
+	reader.ReadUint8() // must be 0
 }
 
 func (self *INVOKE_INTERFACE) Execute(frame *rtda.Frame) {
@@ -27,15 +28,14 @@ func (self *INVOKE_INTERFACE) Execute(frame *rtda.Frame) {
 
 	ref := frame.OperandStack().GetRefFromTop(resolvedMethod.ArgSlotCount() - 1)
 	if ref == nil {
-		panic("java.lang.NullPointerException")
+		panic("java.lang.NullPointerException") // todo
 	}
 	if !ref.Class().IsImplements(methodRef.ResolvedClass()) {
-		log.Printf("ref.Class().IsImplements(methodRef.ResolvedClass())=%v", ref.Class().IsImplements(methodRef.ResolvedClass()))
-		log.Printf("methodRef.ResolvedClass()=%v", methodRef.ResolvedClass().Name())
 		panic("java.lang.IncompatibleClassChangeError")
 	}
 
-	methodToBeInvoked := heap.LookupMethodInClass(ref.Class(), methodRef.Name(), methodRef.Descriptor())
+	methodToBeInvoked := heap.LookupMethodInClass(ref.Class(),
+		methodRef.Name(), methodRef.Descriptor())
 	if methodToBeInvoked == nil || methodToBeInvoked.IsAbstract() {
 		panic("java.lang.AbstractMethodError")
 	}

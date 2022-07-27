@@ -26,8 +26,11 @@ func _ldc(frame *rtda.Frame, index uint) {
 		stack.PushInt(c.(int32))
 	case float32:
 		stack.PushFloat(c.(float32))
+	// case string:
+	// case *heap.ClassRef:
+	// case MethodType, MethodHandle
 	default:
-		panic("todo: ldc! ")
+		panic("todo: ldc!")
 	}
 }
 

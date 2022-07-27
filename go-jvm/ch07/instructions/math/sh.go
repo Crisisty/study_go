@@ -42,9 +42,9 @@ type LSHL struct{ base.NoOperandsInstruction }
 
 func (self *LSHL) Execute(frame *rtda.Frame) {
 	stack := frame.OperandStack()
-	v2 := stack.PopLong()
+	v2 := stack.PopInt()
 	v1 := stack.PopLong()
-	s := uint32(v2) & 0x1f
+	s := uint32(v2) & 0x3f
 	result := v1 << s
 	stack.PushLong(result)
 }
@@ -53,9 +53,9 @@ type LSHR struct{ base.NoOperandsInstruction }
 
 func (self *LSHR) Execute(frame *rtda.Frame) {
 	stack := frame.OperandStack()
-	v2 := stack.PopLong()
+	v2 := stack.PopInt()
 	v1 := stack.PopLong()
-	s := uint32(v2) & 0x1f
+	s := uint32(v2) & 0x3f
 	result := v1 >> s
 	stack.PushLong(result)
 }
@@ -64,9 +64,9 @@ type LUSHR struct{ base.NoOperandsInstruction }
 
 func (self *LUSHR) Execute(frame *rtda.Frame) {
 	stack := frame.OperandStack()
-	v2 := stack.PopLong()
+	v2 := stack.PopInt()
 	v1 := stack.PopLong()
-	s := uint32(v2) & 0x1f
+	s := uint32(v2) & 0x3f
 	result := int64(uint64(v1) >> s)
 	stack.PushLong(result)
 }

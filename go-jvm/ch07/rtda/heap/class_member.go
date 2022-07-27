@@ -20,7 +20,11 @@ func (self *ClassMember) isAccessibleTo(d *Class) bool {
 		return true
 	}
 	c := self.class
-	if self.IsPrivate() {
+	if self.IsProtected() {
+		return d == c || d.IsSubClassOf(c) ||
+			c.GetPackageName() == d.GetPackageName()
+	}
+	if !self.IsPrivate() {
 		return c.GetPackageName() == d.GetPackageName()
 	}
 	return d == c

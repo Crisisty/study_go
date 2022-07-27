@@ -16,12 +16,12 @@ func newFieldRef(cp *ConstantPool, refInfo *classfile.ConstantFieldrefInfo) *Fie
 
 func (self *FieldRef) ResolvedField() *Field {
 	if self.field == nil {
-		self.ResolveFieldRef()
+		self.resolveFieldRef()
 	}
 	return self.field
 }
 
-func (self *FieldRef) ResolveFieldRef() {
+func (self *FieldRef) resolveFieldRef() {
 	d := self.cp.class
 	c := self.ResolvedClass()
 	field := lookupField(c, self.name, self.descriptor)

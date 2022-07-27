@@ -30,7 +30,7 @@ func newClass(cf *classfile.ClassFile) *Class {
 	class.interfaceNames = cf.InterfaceNames()
 	class.constantPool = newConstantPool(class, cf.ConstantPool())
 	class.fields = newFields(class, cf.Fields())
-	class.methods = newMethod(class, cf.Methods())
+	class.methods = newMethods(class, cf.Methods())
 	return class
 }
 
@@ -70,12 +70,13 @@ func (self *Class) ConstantPool() *ConstantPool {
 	return self.constantPool
 }
 
-func (self *Class) StaticVar() Slots {
+func (self *Class) StaticVars() Slots {
 	return self.staticVars
 }
 
 func (self *Class) isAccessibleTo(other *Class) bool {
-	return self.IsPublic() || self.GetPackageName() == other.GetPackageName()
+	return self.IsPublic() ||
+		self.GetPackageName() == other.GetPackageName()
 }
 
 func (self *Class) GetPackageName() string {

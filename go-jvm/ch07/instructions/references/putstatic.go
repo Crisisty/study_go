@@ -16,7 +16,7 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 	field := fieldRef.ResolvedField()
 	class := field.Class()
 	if !class.InitStarted() {
-		frame.RevertNextPc()
+		frame.RevertNextPC()
 		base.InitClass(frame.Thread(), class)
 		return
 	}
@@ -32,7 +32,7 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 
 	descriptor := field.Descriptor()
 	slotId := field.SlotId()
-	slots := class.StaticVar()
+	slots := class.StaticVars()
 	stack := frame.OperandStack()
 
 	switch descriptor[0] {
@@ -47,6 +47,6 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 	case 'L', '[':
 		slots.SetRef(slotId, stack.PopRef())
 	default:
-		//todo
+		// todo
 	}
 }

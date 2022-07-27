@@ -29,7 +29,8 @@ func logFrames(thread *rtda.Thread) {
 		frame := thread.PopFrame()
 		method := frame.Method()
 		className := method.Class().Name()
-		fmt.Printf(">> pc:%4d %v.%v%v \n", frame.NextPC(), className, method.Name(), method.Descriptor())
+		fmt.Printf(">> pc:%4d %v.%v%v \n",
+			frame.NextPC(), className, method.Name(), method.Descriptor())
 	}
 }
 

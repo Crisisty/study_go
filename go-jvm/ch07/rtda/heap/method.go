@@ -10,7 +10,7 @@ type Method struct {
 	argSlotCount uint
 }
 
-func newMethod(class *Class, cfMethods []*classfile.MemberInfo) []*Method {
+func newMethods(class *Class, cfMethods []*classfile.MemberInfo) []*Method {
 	methods := make([]*Method, len(cfMethods))
 	for i, cfMethod := range cfMethods {
 		methods[i] = &Method{}

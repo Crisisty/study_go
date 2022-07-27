@@ -13,6 +13,11 @@ func (self *GET_STATIC) Execute(frame *rtda.Frame) {
 	fieldRef := cp.GetConstant(self.Index).(*heap.FieldRef)
 	field := fieldRef.ResolvedField()
 	class := field.Class()
+	if !class.InitStarted() {
+		frame.RevertNextPC()
+		base.InitClass(frame.Thread(), class)
+		return
+	}
 
 	if !field.IsStatic() {
 		panic("java.lang.IncompatibleClassChangeError")
@@ -20,7 +25,7 @@ func (self *GET_STATIC) Execute(frame *rtda.Frame) {
 
 	descriptor := field.Descriptor()
 	slotId := field.SlotId()
-	slots := class.StaticVar()
+	slots := class.StaticVars()
 	stack := frame.OperandStack()
 
 	switch descriptor[0] {
@@ -35,6 +40,6 @@ func (self *GET_STATIC) Execute(frame *rtda.Frame) {
 	case 'L', '[':
 		stack.PushRef(slots.GetRef(slotId))
 	default:
-		//todo
+		// todo
 	}
 }

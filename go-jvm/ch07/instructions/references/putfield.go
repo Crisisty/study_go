@@ -20,7 +20,7 @@ func (self *PUT_FIELD) Execute(frame *rtda.Frame) {
 	}
 
 	if field.IsFinal() {
-		if currentClass != field.Class() || currentMethod.Name() != "<clinit>" {
+		if currentClass != field.Class() || currentMethod.Name() != "<init>" {
 			panic("java.lang.IllegalAccessError")
 		}
 	}
@@ -66,6 +66,6 @@ func (self *PUT_FIELD) Execute(frame *rtda.Frame) {
 		}
 		ref.Fields().SetRef(slotId, val)
 	default:
-		//todo
+		// todo
 	}
 }

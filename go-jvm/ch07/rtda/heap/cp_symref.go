@@ -8,12 +8,12 @@ type SymRef struct {
 
 func (self *SymRef) ResolvedClass() *Class {
 	if self.class == nil {
-		self.ResolveClassRef()
+		self.resolveClassRef()
 	}
 	return self.class
 }
 
-func (self *SymRef) ResolveClassRef() {
+func (self *SymRef) resolveClassRef() {
 	d := self.cp.class
 	c := d.loader.LoadClass(self.className)
 	if !c.isAccessibleTo(d) {

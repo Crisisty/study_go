@@ -2,7 +2,6 @@ package base
 
 import (
 	"jvmgo/ch07/rtda"
-	"log"
 )
 
 type Instruction interface {
@@ -16,11 +15,11 @@ type NoOperandsInstruction struct {
 func (self *NoOperandsInstruction) FetchOperands(reader *BytecodeReader) {
 }
 
-type BatchInstruction struct {
+type BranchInstruction struct {
 	Offset int
 }
 
-func (self *BatchInstruction) FetchOperands(reader *BytecodeReader) {
+func (self *BranchInstruction) FetchOperands(reader *BytecodeReader) {
 	self.Offset = int(reader.ReadInt16())
 }
 
@@ -37,7 +36,5 @@ type Index16Instruction struct {
 }
 
 func (self *Index16Instruction) FetchOperands(reader *BytecodeReader) {
-	index := reader.ReadUint16()
-	log.Println(index)
-	self.Index = uint(index)
+	self.Index = uint(reader.ReadUint16())
 }

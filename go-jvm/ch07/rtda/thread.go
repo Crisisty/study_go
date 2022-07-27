@@ -34,7 +34,7 @@ func (self *Thread) IsStackEmpty() bool {
 }
 
 func (self *Thread) NewFrame(method *heap.Method) *Frame {
-	return NewFrame(self, method)
+	return newFrame(self, method)
 }
 
 func (self *Thread) SetPC(pc int) {

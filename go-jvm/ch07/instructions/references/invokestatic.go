@@ -18,7 +18,7 @@ func (self *INVOKE_STATIC) Execute(frame *rtda.Frame) {
 
 	class := resolvedMethod.Class()
 	if !class.InitStarted() {
-		frame.RevertNextPc()
+		frame.RevertNextPC()
 		base.InitClass(frame.Thread(), class)
 		return
 	}

@@ -42,7 +42,7 @@ func (self Slots) SetLong(index uint, val int64) {
 func (self Slots) GetLong(index uint) int64 {
 	low := uint32(self[index].num)
 	high := uint32(self[index+1].num)
-	return int64(high)<<32 - int64(low)
+	return int64(high)<<32 | int64(low)
 }
 
 func (self Slots) SetDouble(index uint, val float64) {
