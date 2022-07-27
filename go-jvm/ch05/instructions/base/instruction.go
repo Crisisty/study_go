@@ -13,11 +13,11 @@ type NoOperandsInstruction struct {
 func (self *NoOperandsInstruction) FetchOperands(reader *BytecodeReader) {
 }
 
-type BatchInstruction struct {
+type BranchInstruction struct {
 	Offset int
 }
 
-func (self *BatchInstruction) FetchOperands(reader *BytecodeReader) {
+func (self *BranchInstruction) FetchOperands(reader *BytecodeReader) {
 	self.Offset = int(reader.ReadInt16())
 }
 

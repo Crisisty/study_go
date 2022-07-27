@@ -5,7 +5,7 @@ import (
 	"jvmgo/ch05/rtda"
 )
 
-type IF_ACMPEQ struct{ base.BatchInstruction }
+type IF_ACMPEQ struct{ base.BranchInstruction }
 
 func (self *IF_ACMPEQ) Execute(frame *rtda.Frame) {
 	if _acmp(frame) {
@@ -13,7 +13,7 @@ func (self *IF_ACMPEQ) Execute(frame *rtda.Frame) {
 	}
 }
 
-type IF_ACMPNE struct{ base.BatchInstruction }
+type IF_ACMPNE struct{ base.BranchInstruction }
 
 func (self *IF_ACMPNE) Execute(frame *rtda.Frame) {
 	if !_acmp(frame) {

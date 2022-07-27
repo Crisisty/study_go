@@ -12,14 +12,14 @@ func interpret(methodInfo *classfile.MemberInfo) {
 	codeAttr := methodInfo.CodeAttribute()
 	maxLocals := codeAttr.MaxLocals()
 	maxStack := codeAttr.MaxStack()
-	byteCode := codeAttr.Code()
+	bytecode := codeAttr.Code()
 
 	thread := rtda.NewThread()
 	frame := thread.NewFrame(maxLocals, maxStack)
 	thread.PushFrame(frame)
 
 	defer catchErr(frame)
-	loop(thread, byteCode)
+	loop(thread, bytecode)
 }
 
 func catchErr(frame *rtda.Frame) {

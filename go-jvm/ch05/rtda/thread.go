@@ -24,13 +24,12 @@ func (self *Thread) CurrentFrame() *Frame {
 }
 
 func (self *Thread) NewFrame(maxLocals, maxStack uint) *Frame {
-	return NewFrame(self, maxLocals, maxStack)
-}
-
-func (self *Thread) SetPC(pc int) {
-	self.pc = pc
+	return newFrame(self, maxLocals, maxStack)
 }
 
 func (self *Thread) PC() int {
 	return self.pc
+}
+func (self *Thread) SetPC(pc int) {
+	self.pc = pc
 }

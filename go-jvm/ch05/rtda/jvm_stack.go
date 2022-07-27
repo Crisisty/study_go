@@ -12,7 +12,7 @@ func newStack(maxSize uint) *Stack {
 
 func (self *Stack) push(frame *Frame) {
 	if self.size >= self.maxSize {
-		panic("java.lang.StackOverFlowError")
+		panic("java.lang.StackOverflowError")
 	}
 
 	if self._top != nil {
@@ -24,7 +24,7 @@ func (self *Stack) push(frame *Frame) {
 
 func (self *Stack) pop() *Frame {
 	if self._top == nil {
-		panic("jvm stack is empty! ")
+		panic("jvm stack is empty!")
 	}
 	top := self._top
 	self._top = top.lower
@@ -36,7 +36,7 @@ func (self *Stack) pop() *Frame {
 
 func (self *Stack) top() *Frame {
 	if self._top == nil {
-		panic("jvm stack is empty! ")
+		panic("jvm stack is empty!")
 	}
 
 	return self._top
