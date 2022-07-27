@@ -11,7 +11,7 @@ import (
 func TestCh07(t *testing.T) {
 	cp := classpath.Parse("/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre", "")
 	classloader := heap.NewClassLoader(cp, true)
-	className := strings.Replace("FibonacciTest", ".", "/", -1)
+	className := strings.Replace("InvokeDemo", ".", "/", -1)
 	mainClass := classloader.LoadClass(className)
 	mainMethod := mainClass.GetMainMethod()
 	if mainMethod != nil {
