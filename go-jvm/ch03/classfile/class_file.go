@@ -3,7 +3,7 @@ package classfile
 import "fmt"
 
 type ClassFile struct {
-	//magic        uint32
+	//magic      uint32
 	minorVersion uint16
 	majorVersion uint16
 	constantPool ConstantPool
@@ -27,7 +27,6 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 		}
 	}()
 	cr := &ClassReader{classData}
-	//fmt.Println(classData)
 	cf = &ClassFile{}
 	cf.read(cr)
 	return
@@ -74,7 +73,7 @@ func (self *ClassFile) ClassName() string {
 	return self.constantPool.getClassName(self.thisClass)
 }
 
-func (self *ClassFile) SupperClassName() string {
+func (self *ClassFile) SuperClassName() string {
 	if self.superClass > 0 {
 		return self.constantPool.getClassName(self.superClass)
 	}
@@ -92,7 +91,7 @@ func (self *ClassFile) InterfaceNames() []string {
 func (self *ClassFile) readAndCheckMagic(reader *ClassReader) {
 	magic := reader.readUint32()
 	if magic != 0xCAFEBABE {
-		panic("java.lang.ClassFormatError: magic! ")
+		panic("java.lang.ClassFormatError: magic!")
 	}
 }
 

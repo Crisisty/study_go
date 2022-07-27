@@ -1,7 +1,5 @@
 package classfile
 
-import "fmt"
-
 const (
 	CONSTANT_Class              = 7
 	CONSTANT_Fieldref           = 9
@@ -31,7 +29,6 @@ func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo {
 }
 
 func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
-	fmt.Printf("tag=%v\n", tag)
 	switch tag {
 	case CONSTANT_Integer:
 		return &ConstantIntegerInfo{}
@@ -62,6 +59,6 @@ func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
 	case CONSTANT_InvokeDynamic:
 		return &ConstantInvokeDynamicInfo{}
 	default:
-		panic("java.lang.ClassFormatError: constant pool tag! ")
+		panic("java.lang.ClassFormatError: constant pool tag!")
 	}
 }

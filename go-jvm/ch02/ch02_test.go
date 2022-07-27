@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func TestCh05(t *testing.T) {
+func TestCh02(t *testing.T) {
 	cmd := parseCmd()
-	cmd.class = "GaussTest"
+	cmd.class = "Test"
 	startJVM(cmd)
 }

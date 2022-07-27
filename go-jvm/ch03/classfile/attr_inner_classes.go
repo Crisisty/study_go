@@ -1,6 +1,6 @@
 package classfile
 
-type InnerClassAttribute struct {
+type InnerClassesAttribute struct {
 	classes []*InnerClassInfo
 }
 
@@ -11,7 +11,7 @@ type InnerClassInfo struct {
 	innerClassAccessFlags uint16
 }
 
-func (self *InnerClassAttribute) readInfo(reader *ClassReader) {
+func (self *InnerClassesAttribute) readInfo(reader *ClassReader) {
 	numberOfClasses := reader.readUint16()
 	self.classes = make([]*InnerClassInfo, numberOfClasses)
 	for i := range self.classes {

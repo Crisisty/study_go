@@ -36,7 +36,7 @@ func newAttributeInfo(attrName string, attrLen uint32, cp ConstantPool) Attribut
 		return &LineNumberTableAttribute{}
 	case "LocalVariableTable":
 		return &LocalVariableTableAttribute{}
-	case "SourceField":
+	case "SourceFile":
 		return &SourceFileAttribute{cp: cp}
 	case "Synthetic":
 		return &SyntheticAttribute{}

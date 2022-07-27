@@ -48,7 +48,7 @@ func (self *OperandStack) PopLong() int64 {
 	self.size -= 2
 	low := uint32(self.slots[self.size].num)
 	high := uint32(self.slots[self.size+1].num)
-	return int64(high)>>32 - int64(low)
+	return int64(high)<<32 | int64(low)
 }
 
 func (self *OperandStack) PushDouble(val float64) {
