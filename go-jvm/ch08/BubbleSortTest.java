@@ -1,5 +1,4 @@
 package jvmgo.book.ch08;
-
 public class BubbleSortTest {
     public static void main(String[] args) {
         int[] arr = {22, 84, 77, 11, 95, 9, 78, 56, 36, 97, 65, 36, 10, 24, 92, 48};

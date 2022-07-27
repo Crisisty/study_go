@@ -10,7 +10,7 @@ func (self *Class) NewArray(count uint) *Object {
 	case "[B":
 		return &Object{self, make([]int8, count)}
 	case "[C":
-		return &Object{self, make([]int16, count)}
+		return &Object{self, make([]uint16, count)}
 	case "[S":
 		return &Object{self, make([]int16, count)}
 	case "[I":

@@ -69,6 +69,12 @@ func (self *Class) IsEnum() bool {
 func (self *Class) ConstantPool() *ConstantPool {
 	return self.constantPool
 }
+func (self *Class) Fields() []*Field {
+	return self.fields
+}
+func (self *Class) Methods() []*Method {
+	return self.methods
+}
 
 func (self *Class) StaticVars() Slots {
 	return self.staticVars
@@ -87,15 +93,18 @@ func (self *Class) GetPackageName() string {
 }
 
 func (self *Class) GetMainMethod() *Method {
-	return self.getStaticMethod("main", "([Ljava/lang/String;)V")
+	return self.getMethod("main", "([Ljava/lang/String;)V", true)
 }
 
-func (self *Class) getStaticMethod(name, descriptor string) *Method {
-	for _, method := range self.methods {
-		if method.IsStatic() &&
-			method.name == name &&
-			method.descriptor == descriptor {
-			return method
+func (self *Class) getMethod(name, descriptor string, isStatic bool) *Method {
+	for c := self; c != nil; c = c.superClass {
+		for _, method := range c.methods {
+			if method.IsStatic() == isStatic &&
+				method.name == name &&
+				method.descriptor == descriptor {
+
+				return method
+			}
 		}
 	}
 	return nil
@@ -122,7 +131,7 @@ func (self *Class) StartInit() {
 }
 
 func (self *Class) GetClinitMethod() *Method {
-	return self.getStaticMethod("<clinit>", "()V")
+	return self.getMethod("<clinit>", "()V", true)
 }
 
 func (self *Class) Name() string {
@@ -143,13 +152,16 @@ func (self *Class) isJlCloneable() bool {
 }
 
 func (self *Class) isJioSerializable() bool {
-	return self.name == "java/io/Serializalbe"
+	return self.name == "java/io/Serializable"
 }
 
 func (self *Class) getField(name, descriptor string, isStatic bool) *Field {
 	for c := self; c != nil; c = c.superClass {
 		for _, field := range c.fields {
-			if field.IsStatic() == isStatic && field.name == name && field.descriptor == descriptor {
+			if field.IsStatic() == isStatic &&
+				field.name == name &&
+				field.descriptor == descriptor {
+
 				return field
 			}
 		}

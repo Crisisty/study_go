@@ -4,7 +4,7 @@ var primitiveTypes = map[string]string{
 	"void":    "V",
 	"boolean": "Z",
 	"byte":    "B",
-	"short":   "s",
+	"short":   "S",
 	"int":     "I",
 	"long":    "J",
 	"char":    "C",
@@ -46,5 +46,5 @@ func toClassName(descriptor string) string {
 			return className
 		}
 	}
-	panic("Invalid descriptor :" + descriptor)
+	panic("Invalid descriptor: " + descriptor)
 }

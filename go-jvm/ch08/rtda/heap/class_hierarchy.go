@@ -45,7 +45,7 @@ func (self *Class) isAssignableFrom(other *Class) bool {
 			if !t.IsInterface() {
 				return t.isJlObject()
 			} else {
-				return t.IsSuperInterfaceOf(s)
+				return t.isSuperInterfaceOf(s)
 			}
 		}
 	} else {
@@ -69,6 +69,6 @@ func (self *Class) IsSuperClassOf(other *Class) bool {
 	return other.IsSubClassOf(self)
 }
 
-func (self *Class) IsSuperInterfaceOf(other *Class) bool {
-	return other.isSubInterfaceOf(self)
+func (self *Class) isSuperInterfaceOf(iface *Class) bool {
+	return iface.isSubInterfaceOf(self)
 }

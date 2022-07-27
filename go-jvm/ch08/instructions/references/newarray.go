@@ -57,6 +57,6 @@ func getPrimitiveArrayClass(loader *heap.ClassLoader, atype uint8) *heap.Class {
 	case AT_LONG:
 		return loader.LoadClass("[J")
 	default:
-		panic("Invalid atype! ")
+		panic("Invalid atype!")
 	}
 }

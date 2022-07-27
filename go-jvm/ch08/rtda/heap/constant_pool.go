@@ -5,8 +5,7 @@ import (
 	"jvmgo/ch08/classfile"
 )
 
-type Constant interface {
-}
+type Constant interface{}
 
 type ConstantPool struct {
 	class  *Class
@@ -54,10 +53,10 @@ func newConstantPool(class *Class, cfCp classfile.ConstantPool) *ConstantPool {
 			methodrefInfo := cpInfo.(*classfile.ConstantMethodrefInfo)
 			consts[i] = newMethodRef(rtCp, methodrefInfo)
 		case *classfile.ConstantInterfaceMethodrefInfo:
-			interfaceMethodrefInfo := cpInfo.(*classfile.ConstantInterfaceMethodrefInfo)
-			consts[i] = newInterfaceMethodRef(rtCp, interfaceMethodrefInfo)
+			methodrefInfo := cpInfo.(*classfile.ConstantInterfaceMethodrefInfo)
+			consts[i] = newInterfaceMethodRef(rtCp, methodrefInfo)
 		default:
-			//todo
+			// todo
 		}
 	}
 	return rtCp
